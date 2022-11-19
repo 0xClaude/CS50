@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+		<link href="styles.css" rel="stylesheet" />
+		<title>Trivia!</title>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				// Question 1
+				const wrong = document.querySelectorAll(".wrong");
+				for (let i = 0; i < wrong.length; i++) {
+					wrong[i].addEventListener("click", () => {
+						document.querySelector(".answer").innerHTML = "Wrong";
+					});
+				}
+
+				const right = document.querySelector(".right");
+				right.addEventListener("click", () => {
+					document.querySelector(".answer").innerHTML = "Right!";
+				});
+
+				// Question 2
+				const open = document.querySelector(".open");
+				open.addEventListener("click", () => {
+					const answer = document.querySelector(".check").value;
+					console.log(answer);
+					if (answer === "Luxembourg") {
+						document.querySelector(".openanswer").innerHTML =
+							"Right";
+					} else {
+						document.querySelector(".openanswer").innerHTML =
+							"Wrong";
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="header">
+			<h1>Trivia!</h1>
+		</div>
+
+		<div class="container">
+			<div class="section">
+				<h2>Part 1: Multiple Choice</h2>
+				<hr />
+				<h3>
+					What is the approximate ratio of people to sheep in New
+					Zealand?
+				</h3>
+				<p class="answer"></p>
+				<button class="wrong">6 people per 1 sheep</button>
+				<button class="wrong">3 people per 1 sheep</button>
+				<button class="wrong">1 people per 1 sheep</button>
+				<button class="right">1 people per 3 sheep</button>
+				<button class="wrong">6 people per 6 sheep</button>
+			</div>
+
+			<div class="section">
+				<h2>Part 2: Free Response</h2>
+				<hr />
+				<h3>What is the capital of Luxembourg?</h3>
+				<p class="openanswer"></p>
+				<input type="text" name="answer" class="check" />
+				<button class="open">Check</button>
+			</div>
+		</div>
+	</body>
+</html>
