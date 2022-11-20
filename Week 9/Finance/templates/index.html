@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Your stocks
+{% endblock %}
+
+{% block main %}
+<table>
+    <thead>
+        <td><strong>Symbol</strong></td>
+        <td><strong>Number of shares</strong></td>
+        <td><strong>Price per share</strong></td>
+        <td><strong>Total value</strong></td>
+    </thead>
+    <tbody>
+        {% for share in shares %}
+        <tr>
+            <td>{{ share.stock }}</td>
+            <td>{{ share.amount }}</td>
+            <td>{{ share.price }}</td>
+            <td>{{ share.value }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">Cash</td>
+            <td>{{ cash }}</td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td><strong>{{ total }}</strong></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

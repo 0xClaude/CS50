@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Transaction history
+{% endblock %}
+
+{% block main %}
+<table>
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Stock</td>
+            <td>Price</td>
+            <td>Amount</td>
+            <td>Value</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in log %}
+        <tr>
+            <td>
+                {{ entry.timestamp | datetimeformat  }}
+            </td>
+            <td>{{ entry.stock }}</atd>
+            <td>{{ entry.price | usd }}</td>
+            <td>{{ entry.amount }}</td>
+            <td>{{ entry.total | usd }}</td>
+            {% if entry.action == "buy" %}
+                <td class="green">{{ entry.action }}</td>
+            {% else %}
+                <td class="red">{{ entry.action }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Check price
+{% endblock %}
+
+{% block main %}
+    <p><strong>Name:</strong> {{ data.name }}</p>
+    <p><strong>Symbol:</strong> {{ data.symbol }}</p>
+    <p><strong>Price:</strong> {{ data.price | usd }}</p>
+{% endblock %}
