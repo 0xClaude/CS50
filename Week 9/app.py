@@ -42,6 +42,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+
 @app.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
@@ -49,7 +50,8 @@ def profile():
     if request.method == "GET":
 
         # Get the name for current user
-        username = db.execute("SELECT * FROM users WHERE id = (?)", session["user_id"])
+        username = db.execute(
+            "SELECT * FROM users WHERE id = (?)", session["user_id"])
 
         # Prepare which data is transmitted
         userdata = {
@@ -66,10 +68,12 @@ def profile():
         password = generate_password_hash(request.form.get("password"))
 
         # Update the table
-        db.execute("UPDATE users SET hash = (?) WHERE id = (?)", password, session["user_id"])
+        db.execute("UPDATE users SET hash = (?) WHERE id = (?)",
+                   password, session["user_id"])
 
         # Redirect to home
         return redirect("/")
+
 
 @app.route("/")
 @login_required
@@ -163,7 +167,7 @@ def buy():
         db.execute("UPDATE users SET CASH = (?) WHERE id = (?)",
                    rest, session["user_id"])
 
-        # TODO: Update portfolio
+        #  Update portfolio
         # Check first if the user already has this stock
 
         portfolio_check = db.execute(
@@ -186,7 +190,8 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    data = db.execute("SELECT * FROM transactions WHERE buyer = (?)", session["user_id"])
+    data = db.execute(
+        "SELECT * FROM transactions WHERE buyer = (?)", session["user_id"])
     print(data)
     return render_template("history.html", log=data)
 
@@ -335,12 +340,14 @@ def sell():
             # remove from portfolio
             # particular case: if user sold all of his shares
             if amount == pocket[0]["amount"]:
-                db.execute("DELETE FROM portfolio WHERE stock = (?) AND userid = (?)", symbol, session["user_id"])
+                db.execute(
+                    "DELETE FROM portfolio WHERE stock = (?) AND userid = (?)", symbol, session["user_id"])
             else:
                 db.execute("UPDATE portfolio SET amount = amount - (?) WHERE userid = (?) AND stock = (?)",
-                        amount, session["user_id"], symbol)
+                           amount, session["user_id"], symbol)
 
-            # TODO: Update cash
-            db.execute("UPDATE users SET cash = cash + (?) WHERE id = (?)", total, session["user_id"])
+            # Update cash
+            db.execute(
+                "UPDATE users SET cash = cash + (?) WHERE id = (?)", total, session["user_id"])
 
             return redirect("/")

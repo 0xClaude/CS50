@@ -6,11 +6,12 @@ Your stocks
 
 {% block main %}
 <table>
+    <caption>List of all owned stocks</caption>
     <thead>
-        <td><strong>Symbol</strong></td>
-        <td><strong>Number of shares</strong></td>
-        <td><strong>Price per share</strong></td>
-        <td><strong>Total value</strong></td>
+        <th><strong>Symbol</strong></th>
+        <th><strong>Number of shares</strong></th>
+        <th><strong>Price per share</strong></th>
+        <th><strong>Total value</strong></th>
     </thead>
     <tbody>
         {% for share in shares %}
