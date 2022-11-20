@@ -1,0 +1,39 @@
+main {
+    margin: 2rem;
+    padding: 2rem;
+    height: 80vh;
+}
+
+#title {
+    color: red;
+    text-decoration: underline;
+}
+
+.subtitle {
+    color: blue;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ol {
+    list-style: upper-roman;
+}
+
+li a {
+    text-decoration: none;
+}
+
+.box {
+    box-shadow: 2px 2px 2px 2px;
+    width: 50%;
+}
+
+.copyright {
+    text-align: center;
+}
