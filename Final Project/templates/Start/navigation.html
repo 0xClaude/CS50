@@ -12,12 +12,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {% if session["user_id"] %}
-            <form role="search">
+            <!-- <form role="search">
                 <div class="navbar-nav container-fluid searchbar">
                     <input class="form-control searchbar" type="search" placeholder="Search ..." aria-label="Search">
                     <button class="btn btn-success" type="submit">Search</button>
                 </div>
-            </form>
+            </form> -->
             {% endif %}
             <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if not session["user_id"] %}

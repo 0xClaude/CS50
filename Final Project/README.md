@@ -1,5 +1,5 @@
 # SocialMe
-### Video Demo:
+### Video Demo: 
 ### Description
 
 This final project is my submission for the CS50 edX Harvard course. Please do not blindly copy this, as this violates the honor's code.

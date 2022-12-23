@@ -51,13 +51,12 @@ def main():
 
     # Fetch the news feed
     logged_in = db.execute("SELECT * FROM users WHERE id = (?)", id)
-
     # Fetch user information
-    user = db.execute(
-        "SELECT * FROM users JOIN post ON users.id = post.author ORDER BY timestamp DESC")
+
+    user = db.execute("SELECT users.id, users.username, users.picture, post.id AS postid, post.author, post.text, post.timestamp FROM post JOIN users ON post.author = users.id ORDER BY timestamp DESC")
 
     comments = db.execute(
-        "SELECT * FROM COMMENTS JOIN post on COMMENTS.postid = post.id JOIN users ON COMMENTS.userid = users.id ORDER BY id DESC")
+        "SELECT users.id, users.username, users.picture, post.id AS postid, COMMENTS.commentid, COMMENTS.userid AS commid, COMMENTS.commenttext, COMMENTS.timestamp FROM users JOIN COMMENTS ON users.id = COMMENTS.userid JOIN post ON COMMENTS.postid = post.id")
 
     # Fetch the news
     news = requests.get(
@@ -148,7 +147,6 @@ def register():
         #  save user into database
         data = db.execute("INSERT INTO users (username, hash, email, activated, picture) VALUES(?, ?, ?, ?, ?)",
                           username, password, email, "true", "empty.jpg")
-        # TODO fix this
         id = data
 
         # log the user in
@@ -277,6 +275,7 @@ def comment():
     # save the user id
     userid = session.get("user_id")
 
+
     # Check for data integritiy
     if not request.form.get("postid"):
         return render_template("error.html", error="warning", errormessage="An error occured, please try again.")
@@ -345,6 +344,7 @@ def deletecomment():
         return redirect(f"/profile=id?{request.form.get.id}")
     else:
         return redirect("/")
+
 
 @app.route("/deletepost", methods=["POST", "GET"])
 @login_required
